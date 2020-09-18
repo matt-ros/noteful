@@ -5,74 +5,101 @@ import SidebarMain from './Sidebar/SidebarMain';
 import SidebarNote from './SidebarNote/SidebarNote'
 import Main from './Main/Main';
 import MainNote from './MainNote/MainNote';
-import STORE from './dummy-store';
+import NotefulContext from './NotefulContext';
 
 class App extends React.Component {
   state = {
-    folders: STORE.folders,
-    notes: STORE.notes
+    folders: [],
+    notes: [],
+    error: null
   }
 
-  getFolderfromNote(noteId) {
-    const note = this.state.notes.find(note =>
-      note.id === noteId
-    );
-    const folder = this.state.folders.find(folder =>
-      folder.id === note.folderId
-    );
-    return folder;
+  setFolders = folders => {
+    this.setState({
+      folders,
+      error: null
+    })
+  }
+
+  setNotes = notes => {
+    this.setState({
+      notes,
+      error: null
+    })
+  }
+
+  handleDeleteNote = noteId => {
+    const newNotes = this.state.notes.filter(note => (
+      note.id !== noteId
+    ));
+    this.setState({
+      notes: newNotes
+    });
+  }
+
+  componentDidMount() {
+    fetch('http://localhost:9090/folders')
+      .then(res => {
+        if (!res.ok) {
+          throw new Error(res.statusText);
+        }
+        return res.json();
+      })
+      .then(this.setFolders)
+      .catch(err => {
+        this.setState({
+          error: err.message
+        })
+      });
+
+      fetch('http://localhost:9090/notes')
+      .then(res => {
+        if (!res.ok) {
+          throw new Error(res.statusText);
+        }
+        return res.json();
+      })
+      .then(this.setNotes)
+      .catch(err => {
+        this.setState({
+          error: err.message
+        })
+      });
   }
 
   render() {
+    const contextValue = {
+      folders: this.state.folders,
+      notes: this.state.notes,
+      deleteNote: this.handleDeleteNote
+    }
     return (
       <div className='App'>
         <Header />
+        {this.state.error && <p>{this.state.error}</p>}
         <main className='group'>
-          <Route
-            exact path={['/', '/folder/:folderId']}
-            render={() =>
-              <SidebarMain
-                folders={this.state.folders}
-              />
-            }
-          />
-          <Route
-            path={'/note/:noteId'}
-            render={(routerProps) =>
-              <SidebarNote
-                folder={this.getFolderfromNote(routerProps.match.params.noteId)}
-                history={routerProps.history}
-              />
-            }
-          />
-          <Route
-            exact path={'/'}
-            render={() => 
-              <Main
-                notes={this.state.notes}
-              />
-            }
-          />
-          <Route
-            path={'/folder/:folderId'}
-            render={(routerProps) =>
-              <Main
-                notes={this.state.notes.filter(note =>
-                  note.folderId === routerProps.match.params.folderId
-                )}
-              />
-            }
-          />
-          <Route
-            path={'/note/:noteId'}
-            render={(routerProps) =>
-              <MainNote
-                note={this.state.notes.find(note =>
-                  note.id === routerProps.match.params.noteId
-                )}
-              />
-            }
-          />
+          <NotefulContext.Provider value={contextValue}>
+            <Route
+              exact path={['/', '/folder/:folderId']}
+              component={SidebarMain}
+            />
+            <Route
+              path={'/note/:noteId'}
+              component={SidebarNote}
+            />
+            <Route
+              exact path={'/'}
+              component={Main}
+            />
+            <Route
+              path={'/folder/:folderId'}
+              component={Main}
+            />
+            <Route
+              path={'/note/:noteId'}
+              component={MainNote}
+            />
+          </NotefulContext.Provider>
         </main>
       </div>
     );
