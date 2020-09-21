@@ -9,6 +9,7 @@ import NotefulContext from './NotefulContext';
 import AddFolder from './AddFolder/AddFolder';
 import AddNote from './AddNote/AddNote';
 import ErrorBoundary from './ErrorBoundary/ErrorBoundary';
+import './App.css';
 
 class App extends React.Component {
   state = {

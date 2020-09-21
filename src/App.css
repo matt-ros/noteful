@@ -1,0 +1,7 @@
+.group {
+  display: flex;
+}
+
+.App > p {
+  text-align: center;
+}

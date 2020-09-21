@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import NotefulContext from '../NotefulContext';
 import NoteListItem from '../NoteListItem/NoteListItem';
+import './Main.css';
 
 class Main extends React.Component {
   static contextType = NotefulContext;

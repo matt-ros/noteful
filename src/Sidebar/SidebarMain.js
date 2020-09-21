@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import NotefulContext from '../NotefulContext';
+import './SidebarMain.css';
 
 class SidebarMain extends React.Component {
   static contextType = NotefulContext;

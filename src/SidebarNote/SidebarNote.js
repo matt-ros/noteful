@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import NotefulContext from '../NotefulContext';
+import './SidebarNote.css';
 
 class SidebarNote extends React.Component {
   static contextType = NotefulContext;

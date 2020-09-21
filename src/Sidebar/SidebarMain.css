@@ -1,0 +1,37 @@
+.active {
+  background-color: aqua;
+}
+
+.sidebar {
+  text-align: center;
+  flex: 1;
+  border: 1px solid black;
+}
+
+.sidebar li {
+  cursor: pointer;
+}
+
+li {
+  margin: 5px;
+  padding: 5px;
+  border: 1px solid black;
+  list-style-type: none;
+  background-color: inherit;
+}
+
+ul {
+  padding-left: 0;
+  margin-top: 0;
+}
+
+.folder-li {
+  text-align: center;
+  padding: 20px;
+  font-size: 24px;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}

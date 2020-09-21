@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import NotefulContext from '../NotefulContext';
 import NoteListItem from '../NoteListItem/NoteListItem';
+import './MainNote.css';
 
 class MainNote extends React.Component {
   static contextType = NotefulContext;

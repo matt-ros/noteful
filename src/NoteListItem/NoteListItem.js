@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import NotefulContext from '../NotefulContext';
+import './NoteListItem.css';
 
 class NoteListItem extends React.Component {
   state = {

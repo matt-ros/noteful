@@ -1,0 +1,13 @@
+.note-link {
+  font-size: 36px;
+}
+
+.note-info {
+  display: flex;
+  justify-content: space-between;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}

@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import './AddNote.css';
 
 class AddNote extends React.Component {
   state = {
@@ -53,18 +54,24 @@ class AddNote extends React.Component {
         <h2>Add Note</h2>
         {this.state.error && <p>{this.state.error}</p>}
         <form onSubmit={e => this.handleSubmit(e)}>
-          <label htmlFor="noteName">Note Name: </label>
-          <input type="text" id="noteName" required />
-          <br />
-          <label htmlFor="noteFolder">Folder: </label>
-          <select id="noteFolder">
-            <option value='none'>Select a Folder...</option>
-            {options}
-          </select>
-          <br />
-          <label htmlFor="noteContent">Content: </label>
-          <textarea id="noteContent" />
-          <button type="submit">Add Note</button>
+          <div className="form_group">
+            <label htmlFor="noteName">Note Name: </label>
+            <input type="text" id="noteName" required />
+          </div>
+          <div className="form_group">
+            <label htmlFor="noteFolder">Folder: </label>
+            <select id="noteFolder">
+              <option value='none'>Select a Folder...</option>
+              {options}
+            </select>
+          </div>
+          <div className="form_group">
+            <label htmlFor="noteContent">Content: </label>
+            <textarea id="noteContent" />
+          </div>
+          <div className="button_group">
+            <button type="submit">Add Note</button>
+          </div>
         </form>
       </div>
     )
