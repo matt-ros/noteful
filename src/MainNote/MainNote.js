@@ -1,11 +1,12 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import NotefulContext from '../NotefulContext';
 import NoteListItem from '../NoteListItem/NoteListItem';
 
 class MainNote extends React.Component {
   static contextType = NotefulContext;
 
-  onDeleteNote = noteId => {
+  onDeleteNote = () => {
     this.props.history.push('/')
   }
 
@@ -20,6 +21,30 @@ class MainNote extends React.Component {
       </div>
     )
   }
+}
+
+MainNote.propTypes = {
+  history: PropTypes.shape({
+    action: PropTypes.string,
+    block: PropTypes.func,
+    createHref: PropTypes.func,
+    go: PropTypes.func,
+    goBack: PropTypes.func,
+    goForward: PropTypes.func,
+    length: PropTypes.number,
+    listen: PropTypes.func,
+    location: PropTypes.object,
+    push: PropTypes.func.isRequired,
+    replace: PropTypes.func
+  }).isRequired,
+  match: PropTypes.shape({
+    isExact: PropTypes.bool,
+    params: PropTypes.shape({
+      noteId: PropTypes.string.isRequired
+    }).isRequired,
+    path: PropTypes.string,
+    url: PropTypes.string
+  }).isRequired
 }
 
 export default MainNote;

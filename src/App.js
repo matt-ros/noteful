@@ -6,6 +6,9 @@ import SidebarNote from './SidebarNote/SidebarNote'
 import Main from './Main/Main';
 import MainNote from './MainNote/MainNote';
 import NotefulContext from './NotefulContext';
+import AddFolder from './AddFolder/AddFolder';
+import AddNote from './AddNote/AddNote';
+import ErrorBoundary from './ErrorBoundary/ErrorBoundary';
 
 class App extends React.Component {
   state = {
@@ -35,6 +38,18 @@ class App extends React.Component {
     this.setState({
       notes: newNotes
     });
+  }
+
+  handleAddFolder = folder => {
+    this.setState({
+      folders: [...this.state.folders, folder]
+    })
+  }
+
+  handleAddNote = note => {
+    this.setState({
+      notes: [...this.state.notes, note]
+    })
   }
 
   componentDidMount() {
@@ -75,30 +90,55 @@ class App extends React.Component {
     }
     return (
       <div className='App'>
-        <Header />
+        <ErrorBoundary>
+          <Header />
+        </ErrorBoundary>
         {this.state.error && <p>{this.state.error}</p>}
+        <ErrorBoundary>
+          <Route
+            path={'/addFolder'}
+            render={({ history }) => {
+              return <AddFolder
+                history={history}
+                onClickAdd={this.handleAddFolder}
+              />
+            }}
+          />
+        </ErrorBoundary>
+        <ErrorBoundary>
+          <Route
+            path={'/addNote'}
+            render={({ history }) => {
+              return <AddNote
+                history={history}
+                folders={this.state.folders}
+                onClickAdd={this.handleAddNote}
+              />
+            }}
+          />
+        </ErrorBoundary>
         <main className='group'>
           <NotefulContext.Provider value={contextValue}>
-            <Route
-              exact path={['/', '/folder/:folderId']}
-              component={SidebarMain}
-            />
-            <Route
-              path={'/note/:noteId'}
-              component={SidebarNote}
-            />
-            <Route
-              exact path={'/'}
-              component={Main}
-            />
-            <Route
-              path={'/folder/:folderId'}
-              component={Main}
-            />
-            <Route
-              path={'/note/:noteId'}
-              component={MainNote}
-            />
+            <ErrorBoundary>
+              <Route
+                exact path={['/', '/folder/:folderId']}
+                component={SidebarMain}
+              />
+              <Route
+                path={'/note/:noteId'}
+                component={SidebarNote}
+              />
+            </ErrorBoundary>
+            <ErrorBoundary>
+              <Route
+                exact path={['/', '/folder/:folderId']}
+                component={Main}
+              />
+              <Route
+                path={'/note/:noteId'}
+                component={MainNote}
+              />
+            </ErrorBoundary>
           </NotefulContext.Provider>
         </main>
       </div>

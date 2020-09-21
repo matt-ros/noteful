@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import NotefulContext from '../NotefulContext';
 
 class SidebarMain extends React.Component {
@@ -16,6 +16,11 @@ class SidebarMain extends React.Component {
             </li>
           </NavLink>
         )}
+        <Link to='/addFolder'>
+          <li className='folder-li'>
+            Add Folder
+          </li>
+        </Link>
       </ul>
     )
   }
