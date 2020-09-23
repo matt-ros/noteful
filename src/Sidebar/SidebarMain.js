@@ -11,17 +11,17 @@ class SidebarMain extends React.Component {
     return (
       <ul className='sidebar'>
         {folders.map(folder => 
-          <NavLink key={folder.id} to={`/folder/${folder.id}`}>
-            <li className='folder-li' key={folder.id}>
+          <li className='folder-li' key={folder.id}>
+            <NavLink key={folder.id} to={`/folder/${folder.id}`}>
               {folder.name}
-            </li>
-          </NavLink>
-        )}
-        <Link to='/addFolder'>
-          <li className='folder-li'>
-            Add Folder
+            </NavLink>
           </li>
-        </Link>
+        )}
+        <li className='folder-li'>
+          <Link to='/addFolder'>
+            Add Folder
+          </Link>
+        </li>
       </ul>
     )
   }

@@ -4,10 +4,6 @@
   border: 1px solid black;
 }
 
-.sidebar li {
-  cursor: pointer;
-}
-
 li {
   margin: 5px;
   padding: 5px;

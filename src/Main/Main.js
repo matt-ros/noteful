@@ -20,9 +20,11 @@ class Main extends React.Component {
         {notes.map(note => 
           <NoteListItem key={note.id} note={note} />
         )}
-        <Link to='/addNote'>
-          <li className='addNoteButton'>Add Note</li>
-        </Link>
+        <li className='addNoteButton'>
+          <Link to='/addNote'>
+            Add Note
+          </Link>
+        </li>
       </ul>
     )
   }

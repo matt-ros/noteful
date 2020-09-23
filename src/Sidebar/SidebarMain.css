@@ -8,16 +8,11 @@
   border: 1px solid black;
 }
 
-.sidebar li {
-  cursor: pointer;
-}
-
 li {
   margin: 5px;
   padding: 5px;
   border: 1px solid black;
   list-style-type: none;
-  background-color: inherit;
 }
 
 ul {
@@ -27,11 +22,13 @@ ul {
 
 .folder-li {
   text-align: center;
-  padding: 20px;
+  padding: 2px;
   font-size: 24px;
 }
 
 a {
+  display: block;
+  padding: 20px;
   text-decoration: none;
   color: black;
 }
