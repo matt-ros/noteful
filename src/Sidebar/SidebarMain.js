@@ -13,7 +13,7 @@ class SidebarMain extends React.Component {
         {folders.map(folder => 
           <li className='folder-li' key={folder.id}>
             <NavLink key={folder.id} to={`/folder/${folder.id}`}>
-              {folder.name}
+              {folder.folder_name}
             </NavLink>
           </li>
         )}

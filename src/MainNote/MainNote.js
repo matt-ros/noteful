@@ -13,7 +13,7 @@ class MainNote extends React.Component {
 
   render() {
     const note = this.context.notes.find(note => (
-      note.id === this.props.match.params.noteId
+      note.id == this.props.match.params.noteId
     ))
     return (
       <div className='main-area'>

@@ -16,17 +16,14 @@ class NoteListItem extends React.Component {
   handleDelete(noteId, callback) {
     this.setState({ error: null });
 
-    fetch(`http://localhost:9090/notes/${noteId}`, {
-      method: 'DELETE',
-      headers: {
-        'content-type': 'application/json'
-      }
+    fetch(`http://localhost:8000/api/notes/${noteId}`, {
+      method: 'DELETE'
     })
     .then(res => {
       if (!res.ok) {
         throw new Error(res.statusText);
       }
-      return res.json();
+      return res;
     })
     .then(data => {
       this.props.onDeleteNote();
@@ -43,7 +40,7 @@ class NoteListItem extends React.Component {
       <li>
         {this.state.error && <p>{this.state.error}</p>}
         <Link className='note-link' to={`/note/${this.props.note.id}`}>
-          {this.props.note.name}
+          {this.props.note.note_name}
         </Link>
         <p className='note-info'>
           Date modified: {date}
@@ -66,9 +63,9 @@ class NoteListItem extends React.Component {
 NoteListItem.propTypes = {
   note: PropTypes.shape({
     id: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
+    note_name: PropTypes.string.isRequired,
     modified: PropTypes.string,
-    folderId: PropTypes.string,
+    folder_id: PropTypes.string,
     content: PropTypes.string
   }).isRequired,
   onDeleteNote: PropTypes.func.isRequired

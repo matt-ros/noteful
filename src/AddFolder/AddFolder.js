@@ -11,14 +11,14 @@ class AddFolder extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
     const folder = {};
-    folder.name = event.target.folderName.value.trim();
-    if (folder.name.length === 0) {
+    folder.folder_name = event.target.folderName.value.trim();
+    if (folder.folder_name.length === 0) {
       this.setState({ error: 'Please enter a name for your folder.' });
       return;
     }
     this.setState({ error: null });
 
-    fetch('http://localhost:9090/folders', {
+    fetch('http://localhost:8000/api/folders', {
       method: 'POST',
       body: JSON.stringify(folder),
       headers: {

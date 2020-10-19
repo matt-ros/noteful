@@ -8,15 +8,15 @@ class SidebarNote extends React.Component {
   
   getFolderfromNote(noteId) {
     const note = this.context.notes.find(note =>
-      note.id === noteId
+      note.id == noteId
     );
-    if (note.folderId === 'none') {
+    if (note.folder_id === null) {
       return 'No Folder';
     }
     const folder = this.context.folders.find(folder =>
-      folder.id === note.folderId
+      folder.id === note.folder_id
     );
-    return folder.name;
+    return folder.folder_name;
   }
 
   render() {

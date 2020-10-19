@@ -11,7 +11,7 @@ class Main extends React.Component {
   render() {
     let { notes } = this.context
     notes = ((this.props.match.params.folderId)
-      ? notes.filter(note => note.folderId === this.props.match.params.folderId)
+      ? notes.filter(note => note.folder_id == this.props.match.params.folderId)
       : notes
     )
 

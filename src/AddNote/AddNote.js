@@ -11,18 +11,18 @@ class AddNote extends React.Component {
     e.preventDefault();
     const { noteName, noteFolder, noteContent } = e.target;
     const note = {
-      name: noteName.value.trim(),
-      folderId: noteFolder.value,
+      note_name: noteName.value.trim(),
+      folder_id: noteFolder.value === 'none' ? null : noteFolder.value,
       modified: new Date().toISOString(),
       content: noteContent.value
     };
-    if (note.name.length === 0) {
+    if (note.note_name.length === 0) {
       this.setState({ error: 'Please enter a name for your note.' });
       return;
     }
     this.setState({ error: null })
 
-    fetch('http://localhost:9090/notes', {
+    fetch('http://localhost:8000/api/notes', {
       method: 'POST',
       body: JSON.stringify(note),
       headers: {
@@ -46,7 +46,7 @@ class AddNote extends React.Component {
 
   render() {
     const options = this.props.folders.map((folder, i) => (
-      <option value={folder.id} key={i}>{folder.name}</option>
+      <option value={folder.id} key={i}>{folder.folder_name}</option>
     ));
 
     return (
@@ -81,7 +81,7 @@ class AddNote extends React.Component {
 AddNote.propTypes = {
   folders: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired
+    folder_name: PropTypes.string.isRequired
   })).isRequired,
   history: PropTypes.shape({
     action: PropTypes.string,
